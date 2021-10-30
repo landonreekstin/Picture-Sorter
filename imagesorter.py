@@ -1,3 +1,6 @@
+# This version adds more ease of use and functionality by creating a GUI.
+
+
 from PIL import Image
 import os
 import shutil
@@ -6,41 +9,87 @@ import re
 import keyboard
 import PySimpleGUI as sg
 
-unsorted_directory = "D:/Save Files/Export2/Image"
+unsorted_directory = "D:/Save Files/Export/Picture/New"
 sorted_directory = "D:/Save Files/DriveVersion/Picture"
 #unsorted_directory = "C:/Users/lando/Documents/Landon/ImageSorter/TestSource"
 #sorted_directory = "C:/Users/lando/Documents/Landon/ImageSorter/TestDest"
 
-# Window active management
-class WindowMgr:
-    """Encapsulates some calls to the winapi for window management"""
+class PromptResponse:
+    # Prompmt responses for a yes or no question
+    # Returns action for a yes response
+    def y(self):
+        return True
+    # Returns action for a no response
+    def n(self):
+        return False
 
-    def __init__ (self):
-        """Constructor"""
-        self._handle = None
+    # prompt responses for a user command
+    # Action for delete command, deletes current unsorted image
+    def delete(self):
+        return
+    # Action for skip command, skips current unsorted image
+    def skip(self):
+        return
+    # Action for help command, returns key commands for actions
+    def help():
+        return
 
-    def find_window(self, class_name, window_name=None):
-        """find a window by its class_name"""
-        self._handle = win32gui.FindWindow(class_name, window_name)
 
-    def _window_enum_callback(self, hwnd, wildcard):
-        """Pass to win32gui.EnumWindows() to check all the opened windows"""
-        if re.match(wildcard, str(win32gui.GetWindowText(hwnd))) is not None:
-            self._handle = hwnd
+# Handle file browsing for selecting unsorted folder
+def select_unsorted():
+    return
 
-    def find_window_wildcard(self, wildcard):
-        """find a window whose title matches the wildcard regex"""
-        self._handle = None
-        win32gui.EnumWindows(self._window_enum_callback, wildcard)
+# Handle file browsing for selecting sorted folder
+def select_sorted():
+    return
 
-    def set_foreground(self):
-        """put the window in the foreground"""
-        win32gui.SetForegroundWindow(self._handle)
+# Creates the gui
+def gui():
+    # Creates the elements in the window
+    layout = [[sg.Text("Chose folder of unsorted media")], [sg.Button("Select source")], [sg.Text("Chose folder of sorted media")], 
+        [sg.Button("Select destination")]]
+    # Create the window with elements
+    window = sg.Window("Photo Sorter", layout)
+    return window
 
-    def set_focus(self):
-        """Activate the window"""
-        win32gui.SetActiveWindow(self._handle)
+# Manages window events
+def event_loop(window):
+    # Create an event loop
+    while True:
+        event, values = window.read()
+        # Select source folder
+        if event == "Select source":
+            select_unsorted()
+        if event == "Select destination":
+            select_sorted()
+        # Close Window
+        if event == sg.WIN_CLOSED:
+            break
 
+    window.close()
+
+"""
+# Get user input, returns type of response
+def get_input(prompt_type):
+    keyboard.on_press_key("Enter", lambda _:print("You pressed r"))
+    if prompt_type == "y_n":
+        print("<Enter: Accept>  <Backspace: Decline>")
+        if user_response == 
+            prompt_response = "Yes"
+            return prompt_response
+        elif user_response == "N" or "n" or "no" or "No" or "Ye" or "ye":
+            prompt_response = "Yes"
+            return prompt_response
+
+
+# Manages the UI commands
+def ui(prompt_type):
+    prompt_complete = False
+    while(prompt_complete == False):
+        if prompt_type == "y_n":
+            if 
+            prompt_complete = True
+"""
 
 
 # autocompletes directory, creates new if none found
