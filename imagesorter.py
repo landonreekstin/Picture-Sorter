@@ -14,26 +14,6 @@ sorted_directory = "D:/Save Files/DriveVersion/Picture"
 #unsorted_directory = "C:/Users/lando/Documents/Landon/ImageSorter/TestSource"
 #sorted_directory = "C:/Users/lando/Documents/Landon/ImageSorter/TestDest"
 
-class PromptResponse:
-    # Prompmt responses for a yes or no question
-    # Returns action for a yes response
-    def y(self):
-        return True
-    # Returns action for a no response
-    def n(self):
-        return False
-
-    # prompt responses for a user command
-    # Action for delete command, deletes current unsorted image
-    def delete(self):
-        return
-    # Action for skip command, skips current unsorted image
-    def skip(self):
-        return
-    # Action for help command, returns key commands for actions
-    def help():
-        return
-
 
 # Handle file browsing for selecting unsorted folder
 def select_unsorted():
